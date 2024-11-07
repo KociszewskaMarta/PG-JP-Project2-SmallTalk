@@ -23,6 +23,20 @@ Object subclass: #Wielokat
 			wierzcholki:=Array new: liczbaWierzcholkow.
 			wierzcholki at: 1 put: 0@0.! !
 
+	!Wielokat methodsFor: 'actions'!
+	    
+	    srodekGeometryczny
+	        "licz geometryczny srodek wielokata"
+	        
+	        | sumaX sumaY liczbaWierzcholkow |
+	        sumaX := 0.
+	        sumaY := 0.
+	        liczbaWierzcholkow := wierzcholki size.
+	        
+	        wierzcholki do: [:wierzcholek | sumaX := sumaX + wierzcholek x. sumaY := sumaY + wierzcholek y.].
+	       
+	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).! !
+
 	!Wielokat methodsFor: 'accessing'!
 
 		nazwa
@@ -43,7 +57,8 @@ Object subclass: #Wielokat
 			Transcript show: 'Wielokat: ', self nazwa; cr;
 					tab; show: 'Wierzcholki: '.
 			wierzcholki do: [:wierzcholek | Transcript show: wierzcholek printString; space.].
-			Transcript cr; tab; show: 'Pole: ', self pole printString; cr.! !
+			Transcript cr; tab; show: 'Pole: ', self pole printString; cr.
+			Transcript tab; show: 'srodekGeometryczny: ', self srodekGeometryczny printString; cr.! !
 
 Wielokat subclass: #TrojkatRownoboczny
 	instanceVariableNames: 'bok'
