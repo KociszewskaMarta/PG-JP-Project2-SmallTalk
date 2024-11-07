@@ -23,6 +23,20 @@ Object subclass: #Wielokat
 			wierzcholki:=Array new: liczbaWierzcholkow.
 			wierzcholki at: 1 put: 0@0.! !
 
+	!Wielokat methodsFor: 'geometry'!
+	    
+	    srodekGeometryczny
+	        "licz geometryczny srodek wielokata"
+	        
+	        | sumaX sumaY liczbaWierzcholkow |
+	        sumaX := 0.
+	        sumaY := 0.
+	        liczbaWierzcholkow := wierzcholki size.
+	        
+	        wierzcholki do: [:wierzcholek | sumaX := sumaX + wierzcholek x. sumaY := sumaY + wierzcholek y.].
+	       
+	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).! !
+
 	!Wielokat methodsFor: 'accessing'!
 
 		nazwa
