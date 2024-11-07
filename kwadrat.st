@@ -24,6 +24,7 @@ Object subclass: #Wielokat
 			wierzcholki at: 1 put: 0@0.! !
 
 	!Wielokat methodsFor: 'geometry'!
+	!Wielokat methodsFor: 'actions'!
 	    
 	    srodekGeometryczny
 	        "licz geometryczny srodek wielokata"
