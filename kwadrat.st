@@ -54,7 +54,6 @@ Object subclass: #Wielokat
 			Transcript show: 'Wielokat: ', self nazwa; cr;
 					tab; show: 'Wierzcholki: '.
 			wierzcholki do: [:wierzcholek | Transcript show: wierzcholek printString; space.].
-			Transcript cr; tab; show: 'Pole: ', self pole printString; cr.! !
 			Transcript cr; tab; show: 'Pole: ', self pole printString; cr.
 			Transcript tab; show: 'srodekGeometryczny: ', self srodekGeometryczny printString; cr.! !
 
