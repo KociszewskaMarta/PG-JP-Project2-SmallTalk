@@ -186,10 +186,6 @@ Wielokat subclass: #Kwadrat
 			"licz pole kwadratu"
 			^self bok asFloat squared!
 		
-		skaluj: skala
-		    "skaluje kwadrat i aktualizuje bok"
-		    super skaluj: skala.
-
 	
 	!Kwadrat methodsFor: 'printing'!
 
@@ -207,11 +203,10 @@ k3 drukuj.
 k3 skaluj: 2.
 k3 drukuj.
 
-" | t1 t2 t3 |
+| t1 t2 t3 |
 t1:=TrojkatRownoboczny new initialize: 4.
 t2:=TrojkatRownoboczny new initialize: 5.
-t3:=(t1 + t2)."
-" t3 := TrojkatRownoboczny new initialize: 4.  "
-"t3 drukuj.
+t3:=(t1 + t2).
+t3 drukuj.
 t3 skaluj: 2.
-t3 drukuj. "
+t3 drukuj.
