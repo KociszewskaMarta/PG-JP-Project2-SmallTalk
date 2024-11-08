@@ -76,7 +76,7 @@ Object subclass: #Wielokat
 
 
 Wielokat subclass: #TrojkatRownoboczny
-	instanceVariableNames: 'bok'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
@@ -84,9 +84,8 @@ Wielokat subclass: #TrojkatRownoboczny
 
 	!TrojkatRownoboczny methodsFor: 'initialize-release'!
 
-		initialize: aBok
+		initialize: bok
 			"tworz trojkat o podanym boku"
-			bok:=aBok.
 			super initialize: 3 .
 			wierzcholki at: 2 put: bok@0.
 			wierzcholki at: 3 put: ( bok / 2 )@(self wysokosc).! !
@@ -104,21 +103,21 @@ Wielokat subclass: #TrojkatRownoboczny
 
 	!TrojkatRownoboczny methodsFor: 'actions'!
 
+		bok
+			"zwraca bok trojkata"
+			| p1 p2 |
+			p1 := wierzcholki at: 1.
+			p2 := wierzcholki at: 2.
+			^(p1 dist: p2) asFloatE!
+
 		wysokosc
-			"licz wysokosc trojkata"
-			^bok * 3 asFloatE sqrt / 2!
-			" ^(wierzcholki at: 2) x * 3 asFloatE sqrt / 2! "
+			"zwraca wysokosc trojkata"
+			^self bok * 3 asFloatE sqrt / 2!
 
 		pole
-			"licz pole trojkata"
-			^bok squared * 3 asFloatE sqrt / 4!
-			" ^(wierzcholki at: 2) x squared * 3 asFloatE sqrt / 4! ! "
+			"zwraca pole trojkata"
+			^self bok squared * (3 asFloatE sqrt) / 4! !
 		
-		skaluj: skala
-		    "skaluje trojkat i aktualizuje bok"
-		    super skaluj: skala.
-		    bok := bok * skala.! !
-
 
 	!TrojkatRownoboczny methodsFor: 'printing'!
 
@@ -126,7 +125,7 @@ Wielokat subclass: #TrojkatRownoboczny
 			"drukuje zmienne trojkata"
 			super drukuj.
 			Transcript tab; show: 'Wysokosc: ', self wysokosc printString; cr.
-			Transcript tab; show: 'Bok: ', bok printString; cr.! !
+			Transcript tab; show: 'Bok: ', self bok printString; cr.! !
 
 
 Wielokat subclass: #Kwadrat
@@ -176,18 +175,19 @@ Wielokat subclass: #Kwadrat
 			Transcript tab; show: 'Bok: ', bok printString; cr.! !
 
 
-| k1 k2 k3 |
+" | k1 k2 k3 |
 k1:=Kwadrat new initialize: 4.
 k2:=Kwadrat new initialize: 5.
 k3:=(k1 + k2).
 k3 drukuj.
 k3 skaluj: 2.
-k3 drukuj.
+k3 drukuj. "
 
 | t1 t2 t3 |
 t1:=TrojkatRownoboczny new initialize: 4.
 t2:=TrojkatRownoboczny new initialize: 5.
 t3:=(t1 + t2).
+" t3 := TrojkatRownoboczny new initialize: 4. "
 t3 drukuj.
 t3 skaluj: 2.
 t3 drukuj.
