@@ -35,7 +35,19 @@ Object subclass: #Wielokat
 	        
 	        wierzcholki do: [:wierzcholek | sumaX := sumaX + wierzcholek x. sumaY := sumaY + wierzcholek y.].
 	       
-	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).! !
+	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).!
+		
+	skaluj: skala
+	"skaluje wielokat w okol jego srodka geometrycznego"
+	        
+	        | srodek |
+	        srodek := self srodekGeometryczny.
+	        wierzcholki := wierzcholki collect: [:wierzcholek |
+	            | sX sY |
+	            sX := (wierzcholek x - srodek x) * skala + srodek x.
+	            sY := (wierzcholek y - srodek y) * skala + srodek y.
+	            sX @ sY.
+	        ].! !
 
 	!Wielokat methodsFor: 'accessing'!
 
@@ -95,8 +107,13 @@ Wielokat subclass: #TrojkatRownoboczny
 
 		pole
 			"licz pole trojkata"
-			^bok squared * 3 asFloatE sqrt / 4! !
+			^bok squared * 3 asFloatE sqrt / 4!
 			" ^(wierzcholki at: 2) x squared * 3 asFloatE sqrt / 4! ! "
+		
+		skaluj: skala
+		    "skaluje trojkat i aktualizuje bok"
+		    super skaluj: skala.
+		    bok := bok * skala.! !
 
 	!TrojkatRownoboczny methodsFor: 'printing'!
 
@@ -107,7 +124,7 @@ Wielokat subclass: #TrojkatRownoboczny
 			Transcript tab; show: 'Bok: ', bok printString; cr.! !
 
 Wielokat subclass: #Kwadrat
-	instanceVariableNames: ''
+	instanceVariableNames: 'bok'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
@@ -127,26 +144,43 @@ Wielokat subclass: #Kwadrat
 		pole
 			"licz pole kwadratu"
 
-			^(wierzcholki at: 2) x asFloatE squared! !
+			^bok asFloat squared!
+		
+		skaluj: skala
+		    "skaluje kwadrat i aktualizuje bok"
+		    
+		    super skaluj: skala.
+		    bok := bok * skala.! !
 
 	!Kwadrat methodsFor: 'initialize-release'!
 
-		initialize: bok
+		initialize: abok
 			"tworz kwadrat o podanym boku"
-
+			bok := abok.
 			super initialize: 4.
 			wierzcholki at: 2 put: bok@0.
 			wierzcholki at: 3 put: bok@bok.
 			wierzcholki at: 4 put: 0@bok.! !
+	
+	!Kwadrat methodsFor: 'printing'!
 
-" | k1 k2 |
+		drukuj
+			"drukuje zmienne kwadratu"
+			super drukuj.
+			Transcript tab; show: 'Bok: ', bok printString; cr.! !
+
+| k1 k2 k3 |
 k1:=Kwadrat new initialize: 4.
 k2:=Kwadrat new initialize: 5.
-Transcript show: (k1 + k2) pole printString; cr.
-Transcript show: k2 pole printString; cr.
-k1 drukuj. "
+k3:=(k1 + k2).
+k3 drukuj.
+k3 skaluj: 2.
+k3 drukuj.
+
 | t1 t2 t3 |
 t1:=TrojkatRownoboczny new initialize: 4.
 t2:=TrojkatRownoboczny new initialize: 5.
 t3:=(t1 + t2).
+t3 drukuj.
+t3 skaluj: 2.
 t3 drukuj.
