@@ -35,11 +35,10 @@ Object subclass: #Wielokat
 	        
 	        wierzcholki do: [:wierzcholek | sumaX := sumaX + wierzcholek x. sumaY := sumaY + wierzcholek y.].
 	       
-	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).! !
 	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).!
 		
-		skaluj: skala
-	        "skaluje wielokat w okol jego srodka geometrycznego"
+	skaluj: skala
+	"skaluje wielokat w okol jego srodka geometrycznego"
 	        
 	        | srodek |
 	        srodek := self srodekGeometryczny.
@@ -108,7 +107,6 @@ Wielokat subclass: #TrojkatRownoboczny
 
 		pole
 			"licz pole trojkata"
-			^bok squared * 3 asFloatE sqrt / 4! !
 			^bok squared * 3 asFloatE sqrt / 4!
 			" ^(wierzcholki at: 2) x squared * 3 asFloatE sqrt / 4! ! "
 		
@@ -126,7 +124,6 @@ Wielokat subclass: #TrojkatRownoboczny
 			Transcript tab; show: 'Bok: ', bok printString; cr.! !
 
 Wielokat subclass: #Kwadrat
-	instanceVariableNames: ''
 	instanceVariableNames: 'bok'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -147,7 +144,6 @@ Wielokat subclass: #Kwadrat
 		pole
 			"licz pole kwadratu"
 
-			^(wierzcholki at: 2) x asFloatE squared! !
 			^(wierzcholki at: 2) x asFloatE squared!
 		
 		skaluj: skala
@@ -158,7 +154,6 @@ Wielokat subclass: #Kwadrat
 
 	!Kwadrat methodsFor: 'initialize-release'!
 
-		initialize: bok
 		initialize: abok
 			"tworz kwadrat o podanym boku"
 			bok := abok.
@@ -169,7 +164,6 @@ Wielokat subclass: #Kwadrat
 	
 	!Kwadrat methodsFor: 'printing'!
 
-" | k1 k2 |
 		drukuj
 			"drukuje zmienne kwadratu"
 			super drukuj.
@@ -178,9 +172,6 @@ Wielokat subclass: #Kwadrat
 | k1 k2 k3 |
 k1:=Kwadrat new initialize: 4.
 k2:=Kwadrat new initialize: 5.
-Transcript show: (k1 + k2) pole printString; cr.
-Transcript show: k2 pole printString; cr.
-k1 drukuj. "
 k3:=(k1 + k2).
 k3 drukuj.
 k3 skaluj: 2.
