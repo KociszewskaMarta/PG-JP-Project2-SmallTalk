@@ -14,9 +14,7 @@ Object subclass: #Wielokat
 
 		initialize: liczbaWierzcholkow
 			"konstruktor obiektu - wielokata"
-			nazwa:=(self class name).
-			wierzcholki:=Array new: liczbaWierzcholkow.
-			wierzcholki at: 1 put: 0@0.!
+			self initialize: liczbaWierzcholkow name: (self class name).! 
 
 		initialize: liczbaWierzcholkow name: nowaNazwa
 			"konstruktor obiektu - wielokata"
@@ -87,6 +85,17 @@ Wielokat subclass: #TrojkatRownoboczny
 		initialize: bok
 			"tworz trojkat o podanym boku"
 			super initialize: 3 .
+			self ustawWierzcholki: bok.!
+		
+		initialize: bok name: nowaNazwa
+			"tworz trojkat o podanym boku i nazwie"
+			super initialize: 3 name: nowaNazwa.
+			self ustawWierzcholki: bok.! !
+
+	!TrojkatRownoboczny methodsFor: 'private'!
+
+		ustawWierzcholki: bok
+			"ustawia wierzcholki trojkata"
 			wierzcholki at: 2 put: bok@0.
 			wierzcholki at: 3 put: ( bok / 2 )@(self wysokosc).! !
 
@@ -135,13 +144,35 @@ Wielokat subclass: #Kwadrat
 	category: 'JezykiProgramowania'!
 
 
+	!Kwadrat methodsFor: 'initialize-release'!
+
+		initialize: abok
+			"tworz kwadrat o podanym boku"
+			bok := abok.
+			super initialize: 4.
+			self ustawWierzcholki: abok.!
+		
+		initialize: abok name: nowaNazwa
+			"tworz kwadrat o podanym boku i nazwie"
+			bok := abok.
+			super initialize: 4 name: nowaNazwa.
+			self ustawWierzcholki: abok.! !
+
+	!Kwadrat methodsFor: 'private'!
+
+		ustawWierzcholki: bok
+			"ustawia wierzcholki kwadratu"
+			wierzcholki at: 2 put: bok@0.
+			wierzcholki at: 3 put: bok@bok.
+			wierzcholki at: 4 put: 0@bok! !
+
 	!Kwadrat methodsFor: 'arithmetic'!
 
 		+ figura
 			"dodaj 2 figury w sensie pola"
 			| p |
 			p:=self pole + figura pole.
-			^(Kwadrat new) initialize: p asFloatE sqrt! !
+			^(Kwadrat new) initialize: (p asFloatE sqrt)! !
 
 
 	!Kwadrat methodsFor: 'actions'!
@@ -155,17 +186,6 @@ Wielokat subclass: #Kwadrat
 		    super skaluj: skala.
 		    bok := bok * skala.! !
 
-
-	!Kwadrat methodsFor: 'initialize-release'!
-
-		initialize: abok
-			"tworz kwadrat o podanym boku"
-			bok := abok.
-			super initialize: 4.
-			wierzcholki at: 2 put: bok@0.
-			wierzcholki at: 3 put: bok@bok.
-			wierzcholki at: 4 put: 0@bok.! !
-
 	
 	!Kwadrat methodsFor: 'printing'!
 
@@ -175,19 +195,19 @@ Wielokat subclass: #Kwadrat
 			Transcript tab; show: 'Bok: ', bok printString; cr.! !
 
 
-" | k1 k2 k3 |
+| k1 k2 k3 |
 k1:=Kwadrat new initialize: 4.
-k2:=Kwadrat new initialize: 5.
-k3:=(k1 + k2).
+k2:=Kwadrat new initialize: 5. 
+k3:=(k1 + k2). 
 k3 drukuj.
 k3 skaluj: 2.
-k3 drukuj. "
+k3 drukuj.
 
-| t1 t2 t3 |
+" | t1 t2 t3 |
 t1:=TrojkatRownoboczny new initialize: 4.
 t2:=TrojkatRownoboczny new initialize: 5.
-t3:=(t1 + t2).
-" t3 := TrojkatRownoboczny new initialize: 4. "
-t3 drukuj.
+t3:=(t1 + t2)."
+" t3 := TrojkatRownoboczny new initialize: 4.  "
+"t3 drukuj.
 t3 skaluj: 2.
-t3 drukuj.
+t3 drukuj. "
