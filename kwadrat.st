@@ -138,7 +138,7 @@ Wielokat subclass: #TrojkatRownoboczny
 
 
 Wielokat subclass: #Kwadrat
-	instanceVariableNames: 'bok'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
@@ -146,17 +146,15 @@ Wielokat subclass: #Kwadrat
 
 	!Kwadrat methodsFor: 'initialize-release'!
 
-		initialize: abok
+		initialize: bok
 			"tworz kwadrat o podanym boku"
-			bok := abok.
 			super initialize: 4.
-			self ustawWierzcholki: abok.!
+			self ustawWierzcholki: bok.!
 		
-		initialize: abok name: nowaNazwa
+		initialize: bok name: nowaNazwa
 			"tworz kwadrat o podanym boku i nazwie"
-			bok := abok.
 			super initialize: 4 name: nowaNazwa.
-			self ustawWierzcholki: abok.! !
+			self ustawWierzcholki: bok.! !
 
 	!Kwadrat methodsFor: 'private'!
 
@@ -176,15 +174,21 @@ Wielokat subclass: #Kwadrat
 
 
 	!Kwadrat methodsFor: 'actions'!
+	 
+		bok
+			"zwraca bok kwadratu"
+			| p1 p2 |
+			p1 := wierzcholki at: 1.
+			p2 := wierzcholki at: 2.
+			^(p1 dist: p2) asFloatE!
 
 		pole
 			"licz pole kwadratu"
-			^bok asFloat squared!
+			^self bok asFloat squared!
 		
 		skaluj: skala
 		    "skaluje kwadrat i aktualizuje bok"
 		    super skaluj: skala.
-		    bok := bok * skala.! !
 
 	
 	!Kwadrat methodsFor: 'printing'!
@@ -192,7 +196,7 @@ Wielokat subclass: #Kwadrat
 		drukuj
 			"drukuje zmienne kwadratu"
 			super drukuj.
-			Transcript tab; show: 'Bok: ', bok printString; cr.! !
+			Transcript tab; show: 'Bok: ', self bok printString; cr.! !
 
 
 | k1 k2 k3 |
