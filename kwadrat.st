@@ -9,6 +9,7 @@ Object subclass: #Wielokat
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
 
+
 	!Wielokat methodsFor: 'initialize-release'!
 
 		initialize: liczbaWierzcholkow
@@ -23,60 +24,63 @@ Object subclass: #Wielokat
 			wierzcholki:=Array new: liczbaWierzcholkow.
 			wierzcholki at: 1 put: 0@0.! !
 
+
 	!Wielokat methodsFor: 'actions'!
 	    
 	    srodekGeometryczny
 	        "licz geometryczny srodek wielokata"
-	        
 	        | sumaX sumaY liczbaWierzcholkow |
 	        sumaX := 0.
 	        sumaY := 0.
 	        liczbaWierzcholkow := wierzcholki size.
-	        
-	        wierzcholki do: [:wierzcholek | sumaX := sumaX + wierzcholek x. sumaY := sumaY + wierzcholek y.].
-	       
-	       ^ (sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).!
+	        wierzcholki do: [:wierzcholek |
+				 sumaX := sumaX + wierzcholek x.
+				 sumaY := sumaY + wierzcholek y.
+				 ].
+	    	^(sumaX / liczbaWierzcholkow) @ (sumaY / liczbaWierzcholkow).!
 		
 	skaluj: skala
-	"skaluje wielokat w okol jego srodka geometrycznego"
-	        
-	        | srodek |
-	        srodek := self srodekGeometryczny.
-	        wierzcholki := wierzcholki collect: [:wierzcholek |
-	            | sX sY |
-	            sX := (wierzcholek x - srodek x) * skala + srodek x.
-	            sY := (wierzcholek y - srodek y) * skala + srodek y.
-	            sX @ sY.
-	        ].! !
+		"skaluje wielokat w okol jego srodka geometrycznego"
+	    | srodek |
+	    srodek := self srodekGeometryczny.
+	    wierzcholki := wierzcholki collect: [:wierzcholek |
+	        | sX sY |
+	        sX := (wierzcholek x - srodek x) * skala + srodek x.
+	        sY := (wierzcholek y - srodek y) * skala + srodek y.
+	        sX @ sY.
+	    ].! !
+
 
 	!Wielokat methodsFor: 'accessing'!
 
 		nazwa
 			"podaje nazwe wielokata"
-
 			^nazwa!
 
 		nazwa: nowa_nazwa
 			"ustawia nowa nazwe wielokata"
-
 			nazwa:=nowa_nazwa! !
+
 
 	!Wielokat methodsFor: 'printing'!
 
 		drukuj
 			"drukuje zmienne wielokata"
-
 			Transcript show: 'Wielokat: ', self nazwa; cr;
-					tab; show: 'Wierzcholki: '.
-			wierzcholki do: [:wierzcholek | Transcript show: wierzcholek printString; space.].
+						tab; show: 'Wierzcholki: '.
+			wierzcholki do: [:wierzcholek | 
+				Transcript show: wierzcholek printString; space.
+				].
 			Transcript cr; tab; show: 'Pole: ', self pole printString; cr.
 			Transcript tab; show: 'srodekGeometryczny: ', self srodekGeometryczny printString; cr.! !
+
 
 Wielokat subclass: #TrojkatRownoboczny
 	instanceVariableNames: 'bok'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
+
 
 	!TrojkatRownoboczny methodsFor: 'initialize-release'!
 
@@ -87,21 +91,21 @@ Wielokat subclass: #TrojkatRownoboczny
 			wierzcholki at: 2 put: bok@0.
 			wierzcholki at: 3 put: ( bok / 2 )@(self wysokosc).! !
 
+
 	!TrojkatRownoboczny methodsFor: 'arithmetic'!
 
 		+ figura
 			"dodaj 2 figury w sensie pola"
-
 			| pole bok |
 			pole:=self pole + figura pole.
 			bok:=(4 * pole / 3 asFloatE sqrt) sqrt.
 			^(TrojkatRownoboczny new) initialize: bok! !
 
+
 	!TrojkatRownoboczny methodsFor: 'actions'!
 
 		wysokosc
 			"licz wysokosc trojkata"
-
 			^bok * 3 asFloatE sqrt / 2!
 			" ^(wierzcholki at: 2) x * 3 asFloatE sqrt / 2! "
 
@@ -115,6 +119,7 @@ Wielokat subclass: #TrojkatRownoboczny
 		    super skaluj: skala.
 		    bok := bok * skala.! !
 
+
 	!TrojkatRownoboczny methodsFor: 'printing'!
 
 		drukuj
@@ -123,34 +128,34 @@ Wielokat subclass: #TrojkatRownoboczny
 			Transcript tab; show: 'Wysokosc: ', self wysokosc printString; cr.
 			Transcript tab; show: 'Bok: ', bok printString; cr.! !
 
+
 Wielokat subclass: #Kwadrat
 	instanceVariableNames: 'bok'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
 
+
 	!Kwadrat methodsFor: 'arithmetic'!
 
 		+ figura
 			"dodaj 2 figury w sensie pola"
-
 			| p |
-
 			p:=self pole + figura pole.
 			^(Kwadrat new) initialize: p asFloatE sqrt! !
+
 
 	!Kwadrat methodsFor: 'actions'!
 
 		pole
 			"licz pole kwadratu"
-
 			^bok asFloat squared!
 		
 		skaluj: skala
 		    "skaluje kwadrat i aktualizuje bok"
-		    
 		    super skaluj: skala.
 		    bok := bok * skala.! !
+
 
 	!Kwadrat methodsFor: 'initialize-release'!
 
@@ -161,6 +166,7 @@ Wielokat subclass: #Kwadrat
 			wierzcholki at: 2 put: bok@0.
 			wierzcholki at: 3 put: bok@bok.
 			wierzcholki at: 4 put: 0@bok.! !
+
 	
 	!Kwadrat methodsFor: 'printing'!
 
@@ -168,6 +174,7 @@ Wielokat subclass: #Kwadrat
 			"drukuje zmienne kwadratu"
 			super drukuj.
 			Transcript tab; show: 'Bok: ', bok printString; cr.! !
+
 
 | k1 k2 k3 |
 k1:=Kwadrat new initialize: 4.
