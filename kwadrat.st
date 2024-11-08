@@ -144,7 +144,7 @@ Wielokat subclass: #Kwadrat
 		pole
 			"licz pole kwadratu"
 
-			^bok squared!
+			^bok asFloat squared!
 		
 		skaluj: skala
 		    "skaluje kwadrat i aktualizuje bok"
