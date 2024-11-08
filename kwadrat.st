@@ -14,13 +14,21 @@ Object subclass: #Wielokat
 
 		initialize: liczbaWierzcholkow
 			"konstruktor obiektu - wielokata"
-			self initialize: liczbaWierzcholkow name: (self class name).! 
+			self initialize: liczbaWierzcholkow name: (self nameFromClassName).! 
 
 		initialize: liczbaWierzcholkow name: nowaNazwa
 			"konstruktor obiektu - wielokata"
 			nazwa:=nowaNazwa.
 			wierzcholki:=Array new: liczbaWierzcholkow.
 			wierzcholki at: 1 put: 0@0.! !
+	
+	!Wielokat methodsFor: 'private'!
+
+		nameFromClassName
+			"get fiugre name from class name"
+			| className |
+			className := self class name.
+			^className copyFrom: 1 to: (className size).! !
 
 
 	!Wielokat methodsFor: 'actions'!
@@ -64,13 +72,16 @@ Object subclass: #Wielokat
 
 		drukuj
 			"drukuje zmienne wielokata"
-			Transcript show: 'Wielokat: ', self nazwa; cr;
-						tab; show: 'Wierzcholki: '.
+			" Transcript show: 'Wielokat: ', self nazwa; cr;
+						tab; show: 'Wierzcholki: '. "
+			'Wielokat: ', nazwa displayNl.
+			'	Wierzcholki: ' display.
 			wierzcholki do: [:wierzcholek | 
-				Transcript show: wierzcholek printString; space.
+				(wierzcholek printString, ' ') display.
 				].
-			Transcript cr; tab; show: 'Pole: ', self pole printString; cr.
-			Transcript tab; show: 'srodekGeometryczny: ', self srodekGeometryczny printString; cr.! !
+			Transcript cr.
+			('	Pole: ', self pole printString) displayNl.
+			('	SrodekGeometryczny: ', self srodekGeometryczny printString) displayNl.! !
 
 
 Wielokat subclass: #TrojkatRownoboczny
@@ -133,8 +144,8 @@ Wielokat subclass: #TrojkatRownoboczny
 		drukuj
 			"drukuje zmienne trojkata"
 			super drukuj.
-			Transcript tab; show: 'Wysokosc: ', self wysokosc printString; cr.
-			Transcript tab; show: 'Bok: ', self bok printString; cr.! !
+			('	Wysokosc: ', self wysokosc printString) displayNl.
+			('	Bok: ', self bok printString) displayNl.! !
 
 
 Wielokat subclass: #Kwadrat
@@ -192,7 +203,7 @@ Wielokat subclass: #Kwadrat
 		drukuj
 			"drukuje zmienne kwadratu"
 			super drukuj.
-			Transcript tab; show: 'Bok: ', self bok printString; cr.! !
+			('	Bok: ', self bok printString) displayNl.! !
 
 
 | k1 k2 k3 |
