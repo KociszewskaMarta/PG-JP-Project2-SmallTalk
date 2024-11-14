@@ -55,7 +55,7 @@ Object subclass: #Wielokat
 	        sY := (wierzcholek y - srodek y) * skala + srodek y.
 	        sX @ sY.
 	    ]. !
-		
+
 	obroc: kat   
 		(kat > 0 and: [kat < 90])
 			ifTrue: [
@@ -76,7 +76,9 @@ Object subclass: #Wielokat
 					xRotated @ yRotated
 				].
 			]
-			ifFalse: [^ 'Podano zly kat'].
+			ifFalse: [
+			'Podano zly kat ' displayNl.
+			].
 
 
 			!
@@ -249,7 +251,7 @@ t3:=(t1 + t2).
 t3 drukuj.
 t3 skaluj: 2.
 t3 drukuj.
-t3 obroc: 45.
+t3 obroc: 100.
 t3 drukuj.
 
 
