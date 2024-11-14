@@ -9,6 +9,7 @@ Object subclass: #Wielokat
 	poolDictionaries: ''
 	category: 'JezykiProgramowania'!
 
+
 	!Wielokat methodsFor: 'initialize-release'!
 
 		initialize: liczbaWierzcholkow
@@ -54,6 +55,7 @@ Object subclass: #Wielokat
 	        sY := (wierzcholek y - srodek y) * skala + srodek y.
 	        sX @ sY.
 	    ]. !
+		
 	obroc: kat   
 		(kat > 0 and: [kat < 90])
 			ifTrue: [
